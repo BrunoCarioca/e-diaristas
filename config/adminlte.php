@@ -251,7 +251,7 @@ return [
                     'route'  => 'servicos.create',
                     'icon'    => 'fas fa-fw fa-plus',
                 ],
-                
+
             ],
         ],
     ],
@@ -291,6 +291,17 @@ return [
     */
 
     'plugins' => [
+        'jqueryMask' => [
+            'active' => true,
+             'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js',
+                ],
+            ]
+
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [
