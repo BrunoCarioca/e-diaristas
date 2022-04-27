@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input value="{{ $servico->nome ?? '' }}" type="input" class="form-control" name="nome" id="nome"  placeholder="Nome do serviço">
+                        <input value="{{ old('nome' ,$servico->nome ?? '') }}" type="input" class="form-control" name="nome" id="nome"  placeholder="Nome do serviço">
                     </div>
                 </div>
                 <div class="col-md-4">
