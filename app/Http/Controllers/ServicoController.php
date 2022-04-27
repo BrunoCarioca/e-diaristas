@@ -8,41 +8,72 @@ use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
+    /**
+     * lista os serviços
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function index()
-    {  
+    {
         $servicos = Servico::simplepaginate(10);
         return view('servicos.index')->with('servicos', $servicos);
     }
 
-    public function create() 
+    /**
+     * Mostra o form vazio
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function create()
     {
         return view('servicos.create');
     }
 
-    public function store( ServicoRequest $request) 
+    /**
+     * Cria um novo registro de servico no bando de dados
+     *
+     * @param ServicoRequest $request
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function store( ServicoRequest $request)
     {
         $data = $request->except('_token');
         Servico::create($data);
-        return redirect()->route('servicos.index'); 
+        return redirect()->route('servicos.index')
+                        ->with('mensagem', 'Serviço criado com sucesso!');
     }
 
-    public function edit (int $id) 
+    /**
+     * Mostra o formulário preenchido para alteração
+     *
+     * @param integer $id
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function edit (int $id)
     {
         $servico = Servico::findOrFail($id);
 
         return view('servicos.edit')->with('servico', $servico);
     }
 
-    public function update( int $id, ServicoRequest $request) 
+    /**
+     * Atualiza um registro no banco de dados
+     *
+     * @param integer $id
+     * @param ServicoRequest $request
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function update( int $id, ServicoRequest $request)
     {
         $data = $request->except(['_token', '_method']);
-        
+
         $servico = Servico::findOrFail($id);
 
         $servico->update($data);
 
-        return redirect()->route('servicos.index');
-    } 
+        return redirect()->route('servicos.index')
+                        ->with('mensagem', 'Serviço atualizado com sucesso!');
+    }
 
 
 }
